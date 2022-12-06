@@ -19,7 +19,7 @@ const InputsContainer = styled.div`
 `
 
 function App() {
-  const [tarefas, setTarefa] = useState([]);
+  const [tarefas, setTarefas] = useState([]);
   const [inputValue, setInputValue] = useState("");
   const [filtro, setFiltro] = useState("")
 
@@ -38,19 +38,39 @@ function App() {
   // };
 
   const onChangeInput = (event) => {
-    console.log("aaa");
+    setInputValue(event.target.value)
+    console.log(inputValue)
   }
 
-  const criaTarefa = () => {
-    console.log("aaa");
+  const criaTarefa = (e) => {
+    const novaTarefa = {
+      id:Date.now(),
+      texto: inputValue,
+      completa: false,
+    }
+    const tarefaAdicionada = [...tarefas,novaTarefa]
+    setTarefas(tarefaAdicionada)
+    setInputValue('')
   }
 
   const selectTarefa = (id) => {
-    console.log("aaa");
+    const novaLista = tarefas.map((item)=>{
+      if (id === item.id){
+        const novoItem = {...item, completa:!item.completa}
+        return novoItem
+      }else{
+        return item
+      }
+      
+    })
+    setTarefas(novaLista)
+    console.log(id);
   }
 
   const onChangeFilter = (event) => {
-    console.log("aaa");
+setFiltro(event.target.value);
+
+    console.log(filtro);
   }
 
 
